@@ -324,6 +324,19 @@ are now rejected.
 Pending upload WebSocket routes are also preserved across retries,
 and errors on upload event sockets are logged instead of potentially terminating the server.
 
+### Universal XML Plugin Keeps Device Sibling Order
+
+The [Universal XML plugin](../reference/api/plugins.md) used to group the children of each node by
+their native tag name when translating the page source, so siblings could come out in a different
+order than on the device. They now keep the device order. XPath queries that depend on sibling
+order, such as `//Button[2]`, `last()` or the sibling axes, and `findElement` with a selector that
+matches several elements, can now return a different element than in Appium 3.
+
+!!! info "Actions Needed"
+
+    Check XPath selectors that rely on element position while the plugin is active. Selectors that
+    match a single element by name or attributes are unaffected
+
 ## Behavior Fixes
 
 These fixes are relevant when upgrading from Appium 3, even though they do not remove APIs.
